@@ -8,5 +8,6 @@ Feature:
 - [x] Page Object
 - [ ] Cucumber
 - [ ] Cucumber report
+- [ ] Settings
 - [ ] Log
 - [ ] Test parallel
