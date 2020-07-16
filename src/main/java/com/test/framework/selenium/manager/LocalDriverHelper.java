@@ -14,7 +14,5 @@ public class LocalDriverHelper {
 
     public static void setDriver(RemoteWebDriver driverThreadLocal) {
         LocalDriverHelper.driverThreadLocal.set(driverThreadLocal);
-        DriverHelper.navigation("http://a.testaddressbook.com/");
     }
-
 }

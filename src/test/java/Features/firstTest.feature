@@ -7,6 +7,3 @@ Feature: First test
         When I fill the username and password on fields
         And I click sign up button
         Then I see address book page
-
-
-

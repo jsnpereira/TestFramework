@@ -4,16 +4,16 @@ import com.test.framework.selenium.manager.LocalDriverHelper;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory extends Base {
-    private static String seleniumGridHub = "http://localhost:4444/wd/hub";
-    private static boolean local = true;
+    private static String nodeSelenium = "http://172.17.0.2:4444/wd/hub";
+    private static boolean local = false;
 
     public static void Initialize(BrowserType browserType) throws MalformedURLException {
 
@@ -34,48 +34,56 @@ public class DriverFactory extends Base {
         }
     }
 
-
     private static void firefoxBrowser() throws MalformedURLException {
         if (local){
-            System.setProperty(
-                    "webdriver.gecko.driver",
-                    "geckodriver" + getExtesionValue());
-            LocalDriverHelper.setDriver(new FirefoxDriver());
+            firefoxLocal();
         } else {
-            //Open the browser
-            System.setProperty("webdriver.gecko.driver", "C:\\chromedriver\\geckodriver.exe");
-            DesiredCapabilities capabilities = new DesiredCapabilities().firefox();
-
-            RemoteWebDriver driver = new RemoteWebDriver(new URL(seleniumGridHub), capabilities);
-            LocalDriverHelper.setDriver(driver);
+            firefoxRemote();
         }
     }
 
     private static void chromeBrowser() throws MalformedURLException {
         if (local){
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            options.setCapability(CapabilityType
-                    .ForSeleniumServer
-                    .ENSURING_CLEAN_SESSION, true);
-            System.setProperty("webdriver.chrome.driver","chromedriver" + getExtesionValue());
-            LocalDriverHelper.setDriver(new ChromeDriver(options));
+           chromeLocal();
         } else {
-            DesiredCapabilities capabilities = new DesiredCapabilities().chrome();
-            capabilities.setCapability("recordVideo", false);
-            capabilities.setCapability("build", "1.4.1");
-            capabilities.setCapability("idleTimeout", 150);
-
-            RemoteWebDriver  driver = new RemoteWebDriver(new URL(seleniumGridHub), capabilities);
-            LocalDriverHelper.setDriver(driver);
+           chromeRemote();
         }
+    }
 
+    private static void chromeLocal(){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.setCapability(CapabilityType
+                .ForSeleniumServer
+                .ENSURING_CLEAN_SESSION, true);
+        System.setProperty("webdriver.chrome.driver","chromedriver" + getExtensionValue());
+        LocalDriverHelper.setDriver(new ChromeDriver(options));
+    }
+
+    private static void chromeRemote() throws MalformedURLException {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        RemoteWebDriver driver = new RemoteWebDriver(new URL(nodeSelenium), chromeOptions);
+        LocalDriverHelper.setDriver(driver);
+    }
+
+    private static void firefoxLocal(){
+        System.setProperty(
+                "webdriver.gecko.driver",
+                "geckodriver" + getExtensionValue());
+        LocalDriverHelper.setDriver(new FirefoxDriver());
+    }
+
+    private static void firefoxRemote() throws MalformedURLException {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        RemoteWebDriver driver = new RemoteWebDriver(new URL(nodeSelenium), firefoxOptions);
+        LocalDriverHelper.setDriver(driver);
     }
 
     /**
      * @return Get the extension from win or linux
      */
-    public static String getExtesionValue() {
+    public static String getExtensionValue() {
         String extension = "";
         String operationalSystem = System.getProperty("os.name").toLowerCase();
 
@@ -84,8 +92,4 @@ public class DriverFactory extends Base {
         }
         return extension;
     }
-
-
-
-
 }

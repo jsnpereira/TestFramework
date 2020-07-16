@@ -25,6 +25,5 @@ public class TestFirstExecute extends BaseTest {
 
         PageContext.getCurrentPage().As(SignUpPage.class).fillFields(username,password);
         PageContext.setCurrentPage(PageContext.getCurrentPage().As(SignUpPage.class).clickSignUpButton());
-
     }
 }
