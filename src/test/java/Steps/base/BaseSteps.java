@@ -6,7 +6,7 @@ import com.test.framework.selenium.manager.PageContext;
 
 public class BaseSteps extends BaseTest {
 
-    public void setNewPage(BasePage basePage){
+    public void setNewCurrentPage(BasePage basePage){
         PageContext.setCurrentPage(basePage);
     }
 }

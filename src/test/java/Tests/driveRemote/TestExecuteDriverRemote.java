@@ -1,14 +1,8 @@
-package Tests;
+package Tests.driveRemote;
 
 
-import Pages.HomePage;
-import Pages.SignInPage;
-import Pages.SignUpPage;
-import com.test.framework.selenium.manager.PageContext;
-import com.test.framework.utils.DataUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
@@ -23,7 +17,6 @@ public class TestExecuteDriverRemote {
         ChromeOptions chromeOptions = new ChromeOptions();
         WebDriver driver = new RemoteWebDriver(new URL(nodeSelenium), chromeOptions);
         driver.get("http://www.google.com");
-        Thread.sleep(10000);
         driver.quit();
 
     }

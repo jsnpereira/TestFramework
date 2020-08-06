@@ -1,7 +1,5 @@
 package com.test.framework.utils;
 
-import com.test.framework.commons.DataValueConstants;
-
 import java.util.Random;
 
 /**
@@ -50,7 +48,7 @@ public final class DataUtils {
                                      final String domain, Boolean onlyLowCase) {
         Random random = new Random();
         StringBuffer sb = new StringBuffer(username + "+");
-        for (int i = 0; i < DataValueConstants.SIX; i++) {
+        for (int i = 0; i < 6; i++) {
             sb.append(ALPHA_NUMERIC_STRING.charAt(
                     random.nextInt(ALPHA_NUMERIC_STRING.length())));
         }

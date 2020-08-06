@@ -1,6 +1,7 @@
 package Tests;
 
 
+import com.test.framework.commons.PathUrls;
 import com.test.framework.selenium.base.Base;
 import com.test.framework.selenium.base.BrowserType;
 import com.test.framework.selenium.base.DriverFactory;
@@ -15,7 +16,7 @@ public class BaseTest extends Base {
     @BeforeClass
     public void beforeClass() throws MalformedURLException {
         DriverFactory.Initialize(BrowserType.Chrome);
-        DriverHelper.navigation("http://a.testaddressbook.com/");
+        DriverHelper.navigation(PathUrls.HOME);
     }
 
     @AfterClass

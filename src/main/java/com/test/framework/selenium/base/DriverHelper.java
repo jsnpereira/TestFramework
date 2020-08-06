@@ -3,12 +3,14 @@ package com.test.framework.selenium.base;
 
 import com.test.framework.exceptions.NotSelectLocatorType;
 import com.test.framework.selenium.manager.LocalDriverHelper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -46,13 +48,43 @@ public class DriverHelper {
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public WebElement getElement(String locator, LocatorType locatorType) throws NotSelectLocatorType {
-        return LocalDriverHelper.driver().findElement(Locator.getBy(locator, locatorType));
+    public static WebElement getElement(String locator, LocatorType locatorType) throws NotSelectLocatorType {
+        return getElement(Locator.getBy(locator, locatorType));
+    }
+    public static WebElement getElement(By locator) throws NotSelectLocatorType {
+        return LocalDriverHelper.driver().findElement(locator);
     }
 
-    protected static void moveToElement(final WebElement element) {
+    public static void moveToElement(final WebElement element) {
         Actions action = new Actions(LocalDriverHelper.driver());
         action.moveToElement(element).build().perform();
+    }
+
+    public static void scrollToViewElement(final WebElement element) throws NotSelectLocatorType {
+        ((JavascriptExecutor) LocalDriverHelper.driver()).
+                executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void waitElementBeClicked(final WebElement element) {
+        WebDriverWait wait = new WebDriverWait(
+                LocalDriverHelper.driver(), 3);
+        final WebElement until = wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static void typeTextInput(final WebElement element, String text){
+        typeTextInput(element, text, false);
+    }
+
+    public static void typeTextInput(final WebElement element, String text, Boolean clean){
+        if (clean) {
+            element.clear();
+        }
+        element.sendKeys(text);
+    }
+
+    public static void selectItemOnDropDown(final WebElement element, final String value) {
+        Select dropdown = new Select(element);
+        dropdown.selectByValue(value);
     }
 
     public static void redirectTo(final String url) {
@@ -62,4 +94,12 @@ public class DriverHelper {
         loading();
     }
 
+    public static void selectItemVisibleOnDropDown(WebElement countriesListDropdown, String value) {
+        Select dropdown = new Select(countriesListDropdown);
+        dropdown.selectByVisibleText(value);
+    }
+
+    public static String getCurrentURL() {
+        return LocalDriverHelper.driver().getCurrentUrl();
+    }
 }
