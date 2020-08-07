@@ -12,8 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory extends Base {
-    private static String nodeSelenium = "http://172.17.0.2:4444/wd/hub";
-    private static boolean local = true;
+    private static String nodeSelenium = "http://172.18.0.2:4444/wd/hub";
+    private static boolean local = false;
 
     public static void Initialize(BrowserType browserType) throws MalformedURLException {
 
