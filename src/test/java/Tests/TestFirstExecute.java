@@ -12,7 +12,7 @@ public class TestFirstExecute extends BaseTest {
     @Test()
     public void test01() throws InterruptedException {
 
-
+        System.out.println("Start test");
         PageContext.setCurrentPage(GetInstance(MyStorePage.class));
         PageContext.getCurrentPage().As(MyStorePage.class).clickSignIn();
 
