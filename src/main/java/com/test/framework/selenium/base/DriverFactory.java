@@ -1,5 +1,6 @@
 package com.test.framework.selenium.base;
 
+import com.test.framework.commons.Settings;
 import com.test.framework.selenium.manager.LocalDriverHelper;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,11 +13,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory extends Base {
-    private static String nodeSelenium = "http://172.19.0.3:4444/wd/hub";
-    private static boolean local = false;
+    private static String nodeSelenium;
+    private static String pathGridURL = "/wd/hub";
+    private static boolean local = true;
 
     public static void Initialize(BrowserType browserType) throws MalformedURLException {
-
+        nodeSelenium = Settings.gridURL + pathGridURL;
         switch (browserType) {
             case Chrome: {
                 chromeBrowser();

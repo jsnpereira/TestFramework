@@ -1,9 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="My Suite" verbose="2"  parallel="tests" thread-count="1">
-
+    <listeners>
+        <listener class-name="Runner.CucumberListener"/>
+    </listeners>
     <test name="Tests suite" parallel="none">
-        <parameter name = "browser" value="Chrome"/>
         <classes>
             <class name="Runner.CucumberRunner" />
         </classes>

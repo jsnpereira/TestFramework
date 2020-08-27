@@ -1,6 +1,7 @@
 package Runner;
 
 import com.test.framework.commons.PathUrls;
+import com.test.framework.commons.Settings;
 import com.test.framework.selenium.base.Base;
 import com.test.framework.selenium.base.BrowserType;
 import com.test.framework.selenium.base.DriverFactory;
@@ -12,10 +13,9 @@ import java.net.MalformedURLException;
 public class CucumberBase extends Base {
 
     @BeforeMethod
-    @Parameters("browser")
-    public void beforeTest(@Optional("Chrome") String browser) throws MalformedURLException {
-        DriverFactory.Initialize(BrowserType.Chrome.valueOf(browser));
-        DriverHelper.navigation(PathUrls.HOME);
+    public void beforeTest() throws MalformedURLException {
+        DriverFactory.Initialize(Settings.browserType);
+        DriverHelper.navigation(Settings.baseURL);
     }
 
     @AfterMethod(alwaysRun = true)

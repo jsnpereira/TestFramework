@@ -1,9 +1,9 @@
 pipeline{
-    agent { docker { image 'maven:3.6.3-openjdk-15' } }
+    agent any
     stages {
         stage('build') {
-            steps {
-                sh 'mvn --version'
+           withMaven(maven : 'apache-maven-3.6.1') {
+               bat'mvn version'
             }
         }
     }
