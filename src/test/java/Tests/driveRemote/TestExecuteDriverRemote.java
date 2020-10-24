@@ -11,7 +11,7 @@ import java.net.URL;
 
 
 public class TestExecuteDriverRemote {
-    private static String nodeSelenium = "http://172.17.0.2:4444/wd/hub";
+    private static String nodeSelenium = "http://localhost:4444/wd/hub";
     @Test()
     public void test01() throws MalformedURLException, InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();

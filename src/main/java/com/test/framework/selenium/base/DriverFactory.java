@@ -15,7 +15,7 @@ import java.net.URL;
 public class DriverFactory extends Base {
     private static String nodeSelenium;
     private static String pathGridURL = "/wd/hub";
-    private static boolean local = true;
+    private static boolean local = false;
 
     public static void Initialize(BrowserType browserType) throws MalformedURLException {
         nodeSelenium = Settings.gridURL + pathGridURL;

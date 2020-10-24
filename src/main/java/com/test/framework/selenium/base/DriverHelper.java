@@ -94,9 +94,9 @@ public class DriverHelper {
         loading();
     }
 
-    public static void selectItemVisibleOnDropDown(WebElement countriesListDropdown, String value) {
-        Select dropdown = new Select(countriesListDropdown);
-        dropdown.selectByVisibleText(value);
+    public static void selectItemVisibleOnDropDown(WebElement listDropdown, String value) {
+        Select dropdown = new Select(listDropdown);
+        dropdown.selectByValue(value);
     }
 
     public static String getCurrentURL() {

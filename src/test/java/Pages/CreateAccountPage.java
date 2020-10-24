@@ -178,6 +178,8 @@ public class CreateAccountPage extends BasePage {
 
     public void selectState(final Address address) throws NotSelectLocatorType {
         DriverHelper.scrollToViewElement(statesDropdownSelect);
-        DriverHelper.selectItemVisibleOnDropDown(statesDropdownSelect, address.getState());
+        DriverHelper.typeTextInput(statesDropdownSelect, address.getState());
+      //  DriverHelper.scrollToViewElement(statesDropdownSelect);
+      //  DriverHelper.selectItemVisibleOnDropDown(statesDropdownSelect, address.getState());
     }
 }
