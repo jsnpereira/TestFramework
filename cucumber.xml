@@ -2,7 +2,7 @@
 
 <suite name="My Suite" verbose="2"  parallel="tests" thread-count="1">
     <listeners>
-        <listener class-name="Runner.CucumberListener"/>
+        <listener class-name="Listener.CucumberListener"/>
     </listeners>
     <test name="Tests suite" parallel="none">
         <classes>

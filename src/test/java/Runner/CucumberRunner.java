@@ -8,10 +8,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 @CucumberOptions(
-        plugin = {"pretty", "json:target/report/cucumber2.json"},
-        strict = true,
+        plugin = {"junit:target/cucumber.xml", "pretty", "Listener.ListenerPlugin"},
         features = {"src/test/java/Features/"},
         glue = {"Steps"}
 )
@@ -30,6 +28,8 @@ public class CucumberRunner extends CucumberBase {
 
     @Test(groups = "Cucumber", description = "Run cucumber feature", dataProvider = "scenarios")
     public void test(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) throws Throwable {
+        String featureName = pickleWrapper.getPickle().getName();
+        System.out.println("Test method: "+featureName);
         testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
     }
 

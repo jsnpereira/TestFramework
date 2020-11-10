@@ -4,3 +4,5 @@ target/*
 AddressBookTest.iml
 geckodriver
 TestFramework.iml
+reports/*
+.DS_Store
