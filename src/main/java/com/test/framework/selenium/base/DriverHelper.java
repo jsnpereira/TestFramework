@@ -60,7 +60,7 @@ public class DriverHelper {
         action.moveToElement(element).build().perform();
     }
 
-    public static void scrollToViewElement(final WebElement element) throws NotSelectLocatorType {
+    public static void scrollToViewElement(final WebElement element) {
         ((JavascriptExecutor) LocalDriverHelper.driver()).
                 executeScript("arguments[0].scrollIntoView(true);", element);
     }

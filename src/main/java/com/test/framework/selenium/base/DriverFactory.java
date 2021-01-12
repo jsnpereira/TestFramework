@@ -82,9 +82,6 @@ public class DriverFactory extends Base {
         LocalDriverHelper.setDriver(driver);
     }
 
-    /**
-     * @return Get the extension from win or linux
-     */
     public static String getExtensionValue() {
         String extension = "";
         String operationalSystem = System.getProperty("os.name").toLowerCase();

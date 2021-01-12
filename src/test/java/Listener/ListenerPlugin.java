@@ -67,7 +67,6 @@ public class ListenerPlugin implements ConcurrentEventListener {
     public void onTestStepStarted(TestStepStarted testStepStarted) {
         String tcName = testStepStarted.getTestCase().getName();
         String step = null;
-        StepArgument argument = null;
         String keyWord = null;
         if (testStepStarted.getTestStep() instanceof PickleStepTestStep) {
             PickleStepTestStep testStep = (PickleStepTestStep) testStepStarted.getTestStep();
@@ -105,13 +104,13 @@ public class ListenerPlugin implements ConcurrentEventListener {
     private String[] getStepInformation(TestStepFinished testStepFinished) {
         String tcName = testStepFinished.getTestCase().getName();
         String step = null;
-        StepArgument argument = null;
         String keyWord = null;
         if (testStepFinished.getTestStep() instanceof PickleStepTestStep) {
             PickleStepTestStep testStep = (PickleStepTestStep) testStepFinished.getTestStep();
             step = testStep.getStep().getText();
             keyWord = testStep.getStep().getKeyword();
             String[] setup = {keyWord, step};
+
             return setup;
         }
         return new String[0];
